@@ -19,8 +19,9 @@ Here are some APIs that we can use for free. All but the dad jokes one simply ne
 - [Pokemon API](https://pokeapi.co/)
 
 ```js
-// fetch the first pokemon
 fetch("https://pokeapi.co/api/v2/pokemon/1/");
+
+
 ```
 
 ### Trivia API
