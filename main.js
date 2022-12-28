@@ -89,14 +89,24 @@ information result of the searched pokemon
 will try to autocomplete the name of the pokemon the user typed.
 
 */
-const p = document.querySelector(".pokemonresults");
+const cards = document.querySelector("#pokemonCards")
 
-async function getPokemon(){
-    const response = await
-    fetch("https://pokeapi.co/api/v2/pokemon/1/");
-    const data = await response.json();
-    console.log(data);
-    p.textContent = data.name; 
+
+async function getAllPokemon(){
+    for (let i = 1; i <= 100; i++) {
+        let response = await
+        fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+        let data = await response.json();
+        console.log(data);
+        let card = document.createElement("div");
+        card.setAttribute("id", "card");
+        card.innerHTML =`
+        <img src="${data.sprites.front_default}" alt="${data.name}">
+        <h2>${data.name}</h2>`
+        cards.appendChild(card);
+
+    }
+
 }
   let button = document.querySelector(".searchbutton")
-  button.addEventListener("click",getPokemon)
+  button.addEventListener("click",getAllPokemon)
