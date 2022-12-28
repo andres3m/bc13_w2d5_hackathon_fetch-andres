@@ -101,7 +101,7 @@ async function getAllPokemon(){
         let card = document.createElement("div");
         card.setAttribute("id", "card");
         card.innerHTML =`
-        <img src="${data.sprites.front_default}" alt="${data.name}">
+        <img id="pokemonImage" src="${data.sprites.front_default}" alt="${data.name}">
         <h2>${data.name}</h2>`
         cards.appendChild(card);
 
