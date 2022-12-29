@@ -89,7 +89,7 @@ information result of the searched pokemon
 will try to autocomplete the name of the pokemon the user typed.
 
 */
-const cards = document.querySelector("#pokemonCards")
+
 
 
 async function getAllPokemon(){
@@ -98,15 +98,58 @@ async function getAllPokemon(){
         fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         let data = await response.json();
         console.log(data);
+        const cards = document.querySelector(".allPokeCards")
         let card = document.createElement("div");
-        card.setAttribute("id", "card");
+        card.setAttribute("class", "pokeCard");
         card.innerHTML =`
-        <img id="pokemonImage" src="${data.sprites.front_default}" alt="${data.name}">
+        <img class="pokeAllImg" src="${data.sprites.front_default}" alt="${data.name}">
         <h2>${data.name}</h2>`
         cards.appendChild(card);
 
     }
 
 }
-  let button = document.querySelector(".searchbutton")
-  button.addEventListener("click",getAllPokemon)
+  let getAllButton = document.querySelector(".getAllButton")
+  getAllButton.addEventListener("click",getAllPokemon)
+
+
+  
+  async function getRandomPokemon(){
+      let randomI = Math.floor(Math.random() * 100) + 1;
+      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomI}/`);
+      let data = await response.json();
+      const cards = document.querySelector(".allPokeCards")
+      let card = document.createElement("div");
+      card.setAttribute("id", "randomPokeCard");
+      card.innerHTML=`
+      <img id="pokeRanImg" src="${data.sprites.front_default}" alt="${data.name}">
+      <h2 class="pokeRanName">${data.name}</h2>`
+      cards.appendChild(card);
+    }
+    
+
+let getRandomButton = document.querySelector(".getRandomButton")
+getRandomButton.addEventListener("click",getRandomPokemon)
+
+    
+    
+    
+    
+    
+    
+    async function getPokemonbyName(){
+    
+    }
+/*
+const checkbox = document.getElementById('check-box');
+
+checkbox.addEventListener('change', function() {
+  if (this.checked) {
+    h1.classList.add('funky')
+    console.log('Checkbox is checked');
+  } else {
+    h1.classList.remove('funky')
+    console.log('Checkbox is not checked');
+  }
+});
+*/
