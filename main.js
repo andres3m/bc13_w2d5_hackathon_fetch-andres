@@ -93,6 +93,8 @@ will try to autocomplete the name of the pokemon the user typed.
 
 
 async function getAllPokemon(){
+    document.querySelector(".allPokeCards").innerHTML = "";    // Clear the content of "allPokeCards"
+    //const addedCards = new Set();
     for (let i = 1; i <= 100; i++) {
         let response = await
         fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
@@ -105,24 +107,29 @@ async function getAllPokemon(){
         <img class="pokeAllImg" src="${data.sprites.front_default}" alt="${data.name}">
         <h2>${data.name}</h2>`
         cards.appendChild(card);
-
+       /*if (!addedCards.has(card)) {// Check if the card has already been added
+            addedCards.add(card);// If not, add it to the set and append it to the DOM
+            cards.appendChild(card);
+        }*/
     }
-
 }
-  let getAllButton = document.querySelector(".getAllButton")
-  getAllButton.addEventListener("click",getAllPokemon)
+  
+let getAllButton = document.querySelector(".getAllButton")
+getAllButton.addEventListener("click",getAllPokemon)
 
 
   
-  async function getRandomPokemon(){
+async function getRandomPokemon(){
+      // Clear the content of "allPokeCards"
+      document.querySelector(".allPokeCards").innerHTML = "";
       let randomI = Math.floor(Math.random() * 100) + 1;
       let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomI}/`);
       let data = await response.json();
       const cards = document.querySelector(".allPokeCards")
       let card = document.createElement("div");
-      card.setAttribute("id", "randomPokeCard");
+      card.setAttribute("class", "randomPokeCard");
       card.innerHTML=`
-      <img id="pokeRanImg" src="${data.sprites.front_default}" alt="${data.name}">
+      <img class="pokeRanImg" src="${data.sprites.front_default}" alt="${data.name}">
       <h2 class="pokeRanName">${data.name}</h2>`
       cards.appendChild(card);
     }
@@ -153,3 +160,5 @@ checkbox.addEventListener('change', function() {
   }
 });
 */
+
+
