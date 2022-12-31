@@ -90,6 +90,9 @@ will try to autocomplete the name of the pokemon the user typed.
 
 */
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 async function getAllPokemon(){
@@ -100,12 +103,13 @@ async function getAllPokemon(){
         fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         let data = await response.json();
         console.log(data);
+        let name = capitalizeFirstLetter(data.name)
         const cards = document.querySelector(".allPokeCards")
         let card = document.createElement("div");
         card.setAttribute("class", "pokeCard");
         card.innerHTML =`
-        <img class="pokeAllImg" src="${data.sprites.front_default}" alt="${data.name}">
-        <h2>${data.name}</h2>`
+        <img class="pokeAllImg" src="${data.sprites.other.dream_world.front_default}" alt="${data.name}">
+        <h2>${name}</h2>`
         cards.appendChild(card);
        /*if (!addedCards.has(card)) {// Check if the card has already been added
             addedCards.add(card);// If not, add it to the set and append it to the DOM
@@ -125,12 +129,13 @@ async function getRandomPokemon(){
       let randomI = Math.floor(Math.random() * 100) + 1;
       let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomI}/`);
       let data = await response.json();
+      let name = capitalizeFirstLetter(data.name)
       const cards = document.querySelector(".allPokeCards")
       let card = document.createElement("div");
       card.setAttribute("class", "randomPokeCard");
       card.innerHTML=`
-      <img class="pokeRanImg" src="${data.sprites.front_default}" alt="${data.name}">
-      <h2 class="pokeRanName">${data.name}</h2>`
+      <img class="pokeRanImg" src="${data.sprites.other.dream_world.front_default}" alt="${name}">
+      <h2 class="pokeRanName">${name}</h2>`
       cards.appendChild(card);
     }
     
@@ -138,11 +143,6 @@ async function getRandomPokemon(){
 let getRandomButton = document.querySelector(".getRandomButton")
 getRandomButton.addEventListener("click",getRandomPokemon)
 
-    
-    
-    
-    
-    
     
     async function getPokemonbyName(){
     
